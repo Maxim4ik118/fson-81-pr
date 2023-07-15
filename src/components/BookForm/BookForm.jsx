@@ -32,9 +32,24 @@ export default class BookForm extends Component {
   //     });
   //   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = { ...this.state, year: Number.parseInt(this.state.year) }
+    this.props.onAddBook(formData);
+    this.setState({
+      title: '',
+      author: '',
+      year: '',
+      genre: '',
+      favourite: false,
+    })
+  }
+
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>
           <b>Title:</b>
           <input
@@ -88,6 +103,7 @@ export default class BookForm extends Component {
             onChange={this.handleInputChange}
           />
         </label>
+        <button type="submit">Add book</button>
       </form>
     );
   }
