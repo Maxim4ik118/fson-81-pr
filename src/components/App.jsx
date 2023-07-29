@@ -56,6 +56,7 @@ export class App extends Component {
       if (this.state.showBooks === SHOW_CRITERIAS.favourites) {
         return book.favourite;
       }
+      return true;
     });
 
     return (
