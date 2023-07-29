@@ -1,110 +1,109 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export default class BookForm extends Component {
-  state = {
+export default function BookForm({ onAddBook }) {
+  const [formData, setFormData] = useState({
     title: '',
     author: '',
     year: '',
     genre: '',
     favourite: false,
-  };
+  });
 
-  handleInputChange = ({ target: { value, name, type, checked } }) => {
+  const handleInputChange = ({ target: { value, name, type, checked } }) => {
     if (type === 'checkbox') {
-      this.setState({
+      setFormData({
+        ...formData,
         [name]: checked,
       });
     } else {
-      this.setState({
+      setFormData({
+        ...formData,
         [name]: value,
       });
     }
   };
 
   //   handleAuthorChange = event => {
-  //     this.setState({
+  //     setState({
   //       author: event.target.value,
   //     });
   //   };
   //   handleYearChange = event => {
-  //     this.setState({
+  //     setState({
   //       year: event.target.value,
   //     });
   //   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    const formData = { ...this.state, year: Number.parseInt(this.state.year) }
-    this.props.onAddBook(formData);
-    this.setState({
+    const bookData = { ...formData, year: Number.parseInt(formData.year) };
+    onAddBook(bookData);
+    setFormData({
       title: '',
       author: '',
       year: '',
       genre: '',
       favourite: false,
-    })
-  }
+    });
+  };
 
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <b>Title:</b>
-          <input
-            type="text"
-            placeholder="To Kill a Mockingbird"
-            required
-            name="title"
-            value={this.state.title}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          <b>Author:</b>
-          <input
-            type="text"
-            placeholder="Harper Lee"
-            required
-            name="author"
-            value={this.state.author}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          <b>Year:</b>
-          <input
-            type="number"
-            placeholder="1960"
-            required
-            name="year"
-            value={this.state.year}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          <b>Genre:</b>
-          <input
-            type="text"
-            placeholder="novel"
-            required
-            name="genre"
-            value={this.state.genre}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          <b>Favourite:</b>
-          <input
-            type="checkbox"
-            name="favourite"
-            checked={this.state.favourite}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <button type="submit">Add book</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        <b>Title:</b>
+        <input
+          type="text"
+          placeholder="To Kill a Mockingbird"
+          required
+          name="title"
+          value={formData.title}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <b>Author:</b>
+        <input
+          type="text"
+          placeholder="Harper Lee"
+          required
+          name="author"
+          value={formData.author}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <b>Year:</b>
+        <input
+          type="number"
+          placeholder="1960"
+          required
+          name="year"
+          value={formData.year}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <b>Genre:</b>
+        <input
+          type="text"
+          placeholder="novel"
+          required
+          name="genre"
+          value={formData.genre}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        <b>Favourite:</b>
+        <input
+          type="checkbox"
+          name="favourite"
+          checked={formData.favourite}
+          onChange={handleInputChange}
+        />
+      </label>
+      <button type="submit">Add book</button>
+    </form>
+  );
 }
