@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fson-81-pr/static/css/main.7acaea2f.css",
+    "main.js": "/fson-81-pr/static/js/main.e1535a5b.js",
+    "index.html": "/fson-81-pr/index.html",
+    "main.7acaea2f.css.map": "/fson-81-pr/static/css/main.7acaea2f.css.map",
+    "main.e1535a5b.js.map": "/fson-81-pr/static/js/main.e1535a5b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.e1535a5b.js"
+  ]
+}
